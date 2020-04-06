@@ -1,0 +1,43 @@
+button {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  transition: background-color 0.4s ease;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+.tab-nav-button {
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  width: 2.5rem;
+  height: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  z-index: 4;
+}
+
+.tab-nav-button:first-of-type {
+  left: 0;
+}
+
+.tab-nav-button:last-of-type {
+  right: 0;
+}
+
+.tab-nav-button:hover .material-icon {
+  color: #222;
+}

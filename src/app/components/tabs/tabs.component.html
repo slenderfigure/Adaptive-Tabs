@@ -1,0 +1,20 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<section *ngIf="tabs?.length" id="wrapper">
+  <tab-header></tab-header>
+
+  <div class="tab-content">
+    <div
+     #contentSlide
+     *ngFor="let tab of tabs; index as index"
+     class="content-slide">
+      <article class="tab">
+        <div *ngIf="tab.content.images" class="image">
+          <img [src]="tab.content.images[0]" alt="tab.header">
+        </div>
+
+        <p [innerHTML]="tab.content.text"></p>
+      </article>
+    </div>
+  </div>
+</section>

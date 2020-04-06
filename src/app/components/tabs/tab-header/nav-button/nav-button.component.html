@@ -1,0 +1,22 @@
+<ng-container *ngIf="showButton">
+  <button 
+    #navButton
+    disabled 
+    (click)="onClick('before')"
+    (mousedown)="onMouseDown('before')"
+    (mouseup)="clearPersistenClick()"
+    (mouseout)="clearPersistenClick()"
+    class="tab-nav-button">
+    <span class="material-icons">keyboard_arrow_left</span>
+  </button>
+
+  <button 
+    #navButton
+    (click)="onClick('next')"
+    (mousedown)="onMouseDown('next')"
+    (mouseup)="clearPersistenClick()"
+    (mouseout)="clearPersistenClick()"
+    class="tab-nav-button">
+    <span class="material-icons">keyboard_arrow_right</span>
+  </button>
+</ng-container>

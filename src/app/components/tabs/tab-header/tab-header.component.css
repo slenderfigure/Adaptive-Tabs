@@ -1,0 +1,78 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #eee;
+  user-select: none;
+  overflow: hidden;
+}
+
+.tab-header {
+  width: 100%;
+  height: inherit;
+  background: transparent;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tab-header::-webkit-scrollbar {
+  display: none;
+}
+
+.strip {
+  position: relative;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  justify-content: center;
+  width: fit-content;
+  height: 100%;
+}
+
+.strip-alt {
+  padding: 0 2.5rem;
+}
+
+.strip li {
+  flex-shrink: 0;
+  position: relative;
+  min-width: 160px;
+  max-width: 220px;
+  height: inherit;
+  padding: 0 1.5rem;
+  color: #2997ff;
+  font-size: 0.95rem;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 50px;
+  background-color: #fff;
+  transition: filter 0.4s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.strip li .text-overflow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent, #fff 40%);
+}
+
+.strip li:hover:not(.focused-tab) {
+  filter: brightness(95%)
+}
+
+.strip .focused-tab {
+  background-color: #d0e8ff;
+}
+
+.strip .focused-tab .text-overflow {
+  background-image: linear-gradient(90deg, transparent, #d0e8ff 40%);
+}
