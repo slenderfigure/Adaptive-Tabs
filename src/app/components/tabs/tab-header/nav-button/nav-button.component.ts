@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ViewChildren, ElementRef, QueryList } from '@angular/core';
 
-import { TabService } from '../../service/tab.service';
+import { TabHeaderService } from '../../service/tab-header.service';
 
 @Component({
   selector: 'nav-button',
@@ -16,10 +16,10 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
   private clickHoldEventRepeat: any;
 
 
-  constructor(private tabService: TabService) { }
+  constructor(private ts: TabHeaderService) { }
 
   ngOnInit(): void {
-    this.tabService.navigationButtonsState.subscribe(state => {
+    this.ts.navigationButtonsState.subscribe(state => {
       this.showButton = state;
     });
   }
@@ -36,7 +36,7 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private setDefaults() {
     if (this.tabHeader.scrollWidth > this.tabHeader.clientWidth) {
-      this.tabService.setNavigationButtonsState(true);
+      this.ts.setNavButtonState(true);
     }
   }
 
@@ -46,9 +46,9 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private onResize() {
     if (this.tabHeader.scrollWidth > this.tabHeader.clientWidth) {
-      this.tabService.setNavigationButtonsState(true);
+      this.ts.setNavButtonState(true);
     } else {
-      this.tabService.setNavigationButtonsState(false);
+      this.ts.setNavButtonState(false);
     }
   }
 
@@ -59,7 +59,7 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     const steps: number = direction.toLowerCase() == 'next' ?
       220 : -220;
 
-    this.setNavButtonDisableState();
+    this.disableNavButtons();
     this.tabHeader.scrollBy({ left: steps, behavior: 'smooth' });
   }
 
@@ -71,7 +71,7 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
     const scrollDiff = this.tabHeader.scrollWidth - this.tabHeader.clientWidth;
     const steps = direction.toLowerCase() == 'next' ? 220 : -220;
 
-    this.setNavButtonDisableState();
+    this.disableNavButtons();
 
     this.clickHoldEventDelay = setTimeout(() => {
       this.clickHoldEventRepeat = setInterval(() => {
@@ -101,7 +101,7 @@ export class NavButtonComponent implements OnInit, AfterViewInit, OnDestroy {
    * if the tabheader scroll is 0 (disable left button)
    * & if tab header scroll reaches the end (disable right button)
    */
-  setNavButtonDisableState() {
+  disableNavButtons() {
     if (!this.showButton) { return; }
 
     const navButtons = <HTMLButtonElement[]>this.navButtons.toArray()

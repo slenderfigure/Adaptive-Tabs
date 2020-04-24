@@ -37,6 +37,10 @@
   padding: 0 2.5rem;
 }
 
+.strip-alt tab-indicator #tab-indicator {
+  left: 2.5rem ;
+}
+
 .strip li {
   flex-shrink: 0;
   position: relative;

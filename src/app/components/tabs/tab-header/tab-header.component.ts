@@ -3,12 +3,15 @@ import { ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 
 import { NavButtonComponent } from './nav-button/nav-button.component';
 import { TabIndicatorComponent } from './tab-indicator/tab-indicator.component';
-import { TabService } from '../service/tab.service';
+import { TabHeaderService } from '../service/tab-header.service';
+
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'tab-header',
   templateUrl: './tab-header.component.html',
-  styleUrls: ['./tab-header.component.css']
+  styleUrls: ['./tab-header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TabHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   headers: string[];
@@ -22,12 +25,12 @@ export class TabHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   showNavButtons: boolean = false;
 
   
-  constructor(private tabService: TabService) { }
+  constructor(private ts: TabHeaderService) { }
 
   ngOnInit(): void {
-    this.headers = this.tabService.getHeaders();
+    this.headers = this.ts.getHeaders();
 
-    this.tabService.navigationButtonsState.subscribe(state => {
+    this.ts.navigationButtonsState.subscribe(state => {
       this.showNavButtons = state;
     });
   }
@@ -50,7 +53,7 @@ export class TabHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     const tabStrip = <HTMLLIElement[]>this.tabStrip.toArray()
       .map(tab => tab.nativeElement);
 
-    this.tabService.setIndicatorWidth(tabStrip[this.activeTab].offsetWidth);
+    this.ts.setIndicatorWidth(tabStrip[this.activeTab].offsetWidth);
     this.navButtonComponent.tabHeader = tabHeader;
   }
 
@@ -60,7 +63,7 @@ export class TabHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   onClick(index: number) {
     this.activeTabHeader = index;
     this.tabHeaderScrollIntoView(index);
-    this.tabService.changeActiveContentSlide(index);
+    this.ts.changeActiveContentSlide(index);
     this.tabIndicator.activeIndicatorAnimation(this.tabStrip);
   }
 
@@ -105,7 +108,7 @@ export class TabHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     const tabStrip = <HTMLLIElement[]>this.tabStrip.toArray()
       .map(tab => tab.nativeElement);
 
-    this.navButtonComponent.setNavButtonDisableState();
+    this.navButtonComponent.disableNavButtons();
 
     if (this.showNavButtons) {
       tabStrip[index].scrollIntoView({

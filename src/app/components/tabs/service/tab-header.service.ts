@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Tab } from '../tab.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TabService {
+@Injectable()
+export class TabHeaderService {
   tabs: Tab[];
-
+  
   /** Tab Component and Tab Header Subject **/
-  private activeContentSlideSource = new BehaviorSubject<number>(0);
-  activeContentSlide = this.activeContentSlideSource.asObservable();
+  private activeTabSource = new BehaviorSubject<number>(0);
+  activeTab = this.activeTabSource.asObservable();
 
   /** Tab Component and Tab Indicator Subject **/
-  private navigationButtonsStateSource = new BehaviorSubject<boolean>(false);
-  navigationButtonsState = this.navigationButtonsStateSource.asObservable();
+  private navButtonStateSource = new BehaviorSubject<boolean>(false);
+  navigationButtonsState = this.navButtonStateSource.asObservable();
 
   /** Tab Header and Tab Indicator Subject **/
   private initIndicatorWidthSource = new BehaviorSubject<number>(0);
@@ -24,23 +22,22 @@ export class TabService {
 
   constructor() { }
 
-  loadTabs(tabs: Tab[]) {
-    this.tabs = tabs;
-  }
+  loadTabs(tabs: Tab[]) { this.tabs = tabs; }
 
   getHeaders(): string[] {
     return this.tabs.map(tabs => tabs.header);
   }
 
   changeActiveContentSlide(index: number) {
-    this.activeContentSlideSource.next(index);
+    this.activeTabSource.next(index);
   }
 
-  setNavigationButtonsState(state: boolean) {
-    this.navigationButtonsStateSource.next(state);
+  setNavButtonState(state: boolean) {
+    this.navButtonStateSource.next(state);
   }
 
   setIndicatorWidth(width: number) {
     this.initIndicatorWidthSource.next(width);
   }
+
 }

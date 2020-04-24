@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ViewChild, QueryList, ElementRef } from '@angular/core';
 
-import { TabService } from '../../service/tab.service';
+import { TabHeaderService } from '../../service/tab-header.service';
 
 @Component({
   selector: 'tab-indicator',
@@ -11,23 +11,16 @@ import { TabService } from '../../service/tab.service';
 export class TabIndicatorComponent implements OnInit, AfterViewInit {
   @ViewChild('tabIndicator') tabIndicator: ElementRef;
   activeTab: number = 0;
-  showAlternate: boolean;
 
 
-  constructor(private tabService: TabService) { }
+  constructor(private ts: TabHeaderService) { }
 
   ngOnInit(): void {
-    this.tabService.navigationButtonsState.subscribe(state => {
-      this.showAlternate = state;
-    });
-
-    this.tabService.activeContentSlide.subscribe(index => {
-      this.activeTab = index;
-    })
+    this.ts.activeTab.subscribe(index => this.activeTab = index);
   }
 
   ngAfterViewInit(): void {
-    this.tabService.initIndicatorWidth.subscribe(width => {
+    this.ts.initIndicatorWidth.subscribe(width => {
       this.tabIndicator.nativeElement.style.width = `${width}px`;
     });
   }
