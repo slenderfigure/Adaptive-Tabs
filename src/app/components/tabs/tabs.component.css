@@ -28,14 +28,13 @@
   position: relative;
   display: none;
   transition: left 0.5s ease, right 0.5s ease;
-  line-height: 1.7rem;
 }
 
 .content-slide article {
   width: 100%;
   height: auto;
   padding: 2rem;
-  line-height: 1.6rem;
+  line-height: 1.7rem;
 }
 
 .content-slide article .image {
