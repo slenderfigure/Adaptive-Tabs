@@ -44,8 +44,7 @@
 .strip li {
   flex-shrink: 0;
   position: relative;
-  min-width: 160px;
-  max-width: 220px;
+  width: fit-content;
   height: inherit;
   padding: 0 1.5rem;
   color: #2997ff;
