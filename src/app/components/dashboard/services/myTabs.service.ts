@@ -8,8 +8,8 @@ import { Tab } from '../../tabs/tab.model';
 
 @Injectable()
 export class MyTabsService {
-  private url: string = '../../../../api/tabs.json';
-  private url2: string = '../../../../api/tabs2.json';
+  private url: string = 'api/tabs.json';
+  private url2: string = 'api/tabs2.json';
 
   constructor(private http: HttpClient) { }
 
