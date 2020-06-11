@@ -60,15 +60,6 @@
   cursor: pointer;
 }
 
-.strip li .text-overflow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1.5rem;
-  height: 100%;
-  background-image: linear-gradient(90deg, transparent, #fff 40%);
-}
-
 .strip li:hover:not(.focused-tab) {
   filter: brightness(95%)
 }
@@ -77,6 +68,16 @@
   background-color: #d0e8ff;
 }
 
-.strip .focused-tab .text-overflow {
+.strip li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 100%;
+  background-image: linear-gradient(90deg, transparent, #fff 40%);
+}
+
+.strip .focused-tab::after {
   background-image: linear-gradient(90deg, transparent, #d0e8ff 40%);
 }

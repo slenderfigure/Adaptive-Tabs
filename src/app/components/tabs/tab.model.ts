@@ -3,5 +3,6 @@ export interface Tab {
   content: {
     images?: string[],
     text?: string
-  }
+  },
+  order: number
 }
