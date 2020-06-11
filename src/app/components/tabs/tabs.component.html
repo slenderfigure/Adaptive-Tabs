@@ -13,7 +13,7 @@
           <img [src]="tab.content.images[0]" alt="tab.header">
         </div>
 
-        <p [innerHTML]="tab.content.text"></p>
+        <div [innerHTML]="bypassTrust(tab.content.text)"></div>
       </article>
     </div>
   </div>

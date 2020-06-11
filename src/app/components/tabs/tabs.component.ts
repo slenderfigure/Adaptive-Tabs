@@ -4,6 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 
 import { Tab } from './tab.model';
 import { TabHeaderService } from './service/tab-header.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'adison-tabs',
@@ -18,7 +19,14 @@ export class TabsComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscription: Subscription;
   tabs: Tab[];
 
-  constructor(private ts: TabHeaderService) { }
+  constructor(
+    private ts: TabHeaderService,
+    private sanitize: DomSanitizer
+  ) { }
+
+  bypassTrust(content: string): any {
+    return this.sanitize.bypassSecurityTrustHtml(content);
+  }
 
   ngOnInit(): void {
     if(this.tabs$ instanceof Observable) {
